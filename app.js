@@ -14,7 +14,7 @@ class FileObject {
   constructor(resolution, fileName, whichOneInArr) {
     this.resolution = resolution;
     this.fileName = fileName;
-    this.whichOneInArr = whichOneInArr;
+    this.whichOneInArr = whichOneInArr - 1;
     this.counts = this.counts || 0;
     fileObjList[this.resolution] = this;
     resolutionList.push(this.resolution);
@@ -32,17 +32,17 @@ class FileObject {
   }
 
   readLog(readedArr) {
-    this.counts = Number(readedArr[this.whichOneInArr]);
-    console.log(`成功读取${this.resolution}图片历史记录`);
+    if (readedArr[this.whichOneInArr] !== undefined) console.log(`成功读取${this.resolution}图片历史记录`);
+    this.counts = Number(readedArr[this.whichOneInArr] || 0);
   }
 }
 
 //########################!请直接在此处添加更多文件!#############################
 //##################!格式：(命名，读取的文件，记录文件位置)!#######################
-const fileObject540 = new FileObject('540', 'data540.txt', 0);
-const fileObject540raw = new FileObject('540raw', 'data540raw.txt', 1);
-const fileObject720 = new FileObject('720', 'data720.txt', 2);
-const fileObject1080 = new FileObject('1080', 'data1080.txt', 3);
+const fileObject540 = new FileObject('540', 'data540.txt', 1);
+const fileObject540raw = new FileObject('540raw', 'data540raw.txt', 2);
+const fileObject720 = new FileObject('720', 'data720.txt', 3);
+const fileObject1080 = new FileObject('1080', 'data1080.txt', 4);
 
 const port = 3000;
 const time = '0 * * * *'
@@ -53,10 +53,9 @@ for (obj in fileObjList) fileObjList[obj].readFile();
 
 // 每小时报告访问量
 const job = schedule.scheduleJob(time, () => {
-  const time = new Date();
   let countsArr = [];
   for (obj in fileObjList) countsArr[fileObjList[obj].whichOneInArr] = fileObjList[obj].counts;
-  fs.appendFile('log.txt', time + ':' + JSON.stringify(countsArr) + '\n', err => {
+  fs.appendFile('log.txt', new Date() + ':' + JSON.stringify(countsArr) + '\n', err => {
     if (err) console.log(err);
   });
 });
@@ -86,8 +85,12 @@ app.listen(port, () => console.log('express正在监听'+ port +'端口.'));
 //读取log文件
 readLastLines.read('log.txt', 1)
 	.then(line => {
-    let readedCountsArr = line.split('[')[1].split(']')[0].split(',');
-    readedCountsArr = readedCountsArr || [0, 0, 0 ,0];
-    console.log('成功读取log文件:' + readedCountsArr);
-    for (let obj in fileObjList) fileObjList[obj].readLog(readedCountsArr);
+    if (line.includes('[') && line.includes(']')) {
+      let readedCountsArr = line.split('[')[1].split(']')[0].split(',');
+      console.log('成功读取log文件:' + readedCountsArr);
+      for (let obj in fileObjList) fileObjList[obj].readLog(readedCountsArr);
+    } else {
+      console.log('无请求历史记录.')
+      for (let obj in fileObjList) fileObjList[obj].readLog([]);
+    }
   });
