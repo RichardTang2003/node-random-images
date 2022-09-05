@@ -60,7 +60,7 @@ npm i
 # 然后等待安装结束
 node app.js
 ```
-现在，可以通过`http://yourIP`访问简介，使用你配置好的文件调用随机图片。如果需要保持程序后台运行，可以使用screen命令：
+    现在，可以通过`http://yourIP:port`访问简介，使用你配置好的文件调用随机图片。另外，`http://yourIP:port/random`可以随机到所有文件中的一条链接。如果需要保持程序后台运行，可以使用screen命令：
 
 ```bash
 screen -R images
@@ -69,3 +69,7 @@ node app.js
 # 然后按Ctrl+A+D退出该窗口（挂在后台）
 screen -r app #需要重新显示窗口时运行
 ```
+
+### 部署至Replit
+
+Replit项目：[https://replit.com/team/lemonlabo/images-dev](https://replit.com/team/lemonlabo/images-dev)

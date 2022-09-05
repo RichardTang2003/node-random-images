@@ -67,12 +67,23 @@ app.get('/', (req, res) => {
 
 app.get('/:resolution', (req, res) => {
   let resolution = req.params.resolution;
-  if (!(resolutionList.includes(resolution))) res.send('bad request.');
+  //全部随机，实际上是先随机file再随机line
+  if (resolution === 'random') {
+    let whichResolution = Math.floor(Math.random() * resolutionList.length);
+    let obj = fileObjList[ resolutionList[whichResolution] ];
+    let whichArr = Math.floor(Math.random() * obj.arr.length);
+    obj.counts++;
+    res.redirect(obj.arr[whichArr]);
+  }
+  //判断是否有请求的路径对应文件
+  else if (!(resolutionList.includes(resolution))) res.send('bad request.');
+  //请求是否带raw参数 && 是否支持raw参数
   else if (req.query.format == 'raw' && fileObjList[resolution + 'raw'] !== undefined) {
     let whichArr = Math.floor(Math.random() * fileObjList[resolution + 'raw'].arr.length);
     fileObjList[resolution + 'raw'].counts++;
     res.redirect(fileObjList[resolution + 'raw'].arr[whichArr]);
   } 
+  //返回一般结果
   else {
     let whichArr = Math.floor(Math.random() * fileObjList[resolution].arr.length);
     fileObjList[resolution].counts++;
