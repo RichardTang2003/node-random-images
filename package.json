@@ -1,0 +1,29 @@
+{
+  "name": "node-random-images",
+  "version": "1.0.0",
+  "description": "使用Node.js搭建的随机图片后端，通过读取多个本地文件的方式实现丰富API配置",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "illlights",
+  "license": "ISC",
+  "dependencies": {
+    "@replit/database": "^2.0.2",
+    "@types/node": "^18.0.6",
+    "empress": "^0.0.2",
+    "express": "^4.18.1",
+    "fs": "^0.0.1-security",
+    "http": "^0.0.1-security",
+    "node-fetch": "^3.2.6",
+    "node-schedule": "^2.1.0",
+    "nodemon": "^2.0.19",
+    "read-last-lines": "^1.8.0",
+    "readline": "^1.3.0"
+  },
+  "bugs": {
+    "url": "https://github.com/RichardTang2003/node-random-images/issues"
+  },
+  "homepage": "https://github.com/RichardTang2003/node-random-images#readme"
+}
