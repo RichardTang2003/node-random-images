@@ -2,7 +2,7 @@
 -------------
 Made with ❤️ by illlights && Made for freedom to come.
 
-## 特点
+## 特色
 
 + 相较于绝大多数随机图程序，**拥有可自定义的路径配置**，可以实现分辨率分类、画师名、作品名分类。
 + 使用文本文件储存数据，相较于数据库版本**部署简单**，同时节约数据库返回时间，**加快返回速度**。
@@ -60,7 +60,8 @@ npm i
 # 然后等待安装结束
 node app.js
 ```
-    现在，可以通过`http://yourIP:port`访问简介，使用你配置好的文件调用随机图片。另外，`http://yourIP:port/random`可以随机到所有文件中的一条链接。如果需要保持程序后台运行，可以使用screen命令：
+
+现在，可以通过`http://yourIP:port`访问简介，使用你配置好的文件调用随机图片。另外，`http://yourIP:port/random`可以随机到所有文件中的一条链接。如果需要保持程序后台运行，可以使用screen命令：
 
 ```bash
 screen -R images

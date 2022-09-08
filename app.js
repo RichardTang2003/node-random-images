@@ -38,7 +38,7 @@ class FileObject {
 }
 
 //########################!请直接在此处添加更多文件!#############################
-//##################!格式：(命名，读取的文件，记录文件位置)!#######################
+//##################!格式：(路径，读取的文件，记录位置)!##########################
 const fileObject540 = new FileObject('540', 'data540.txt', 1);
 const fileObject540raw = new FileObject('540raw', 'data540raw.txt', 2);
 const fileObject720 = new FileObject('720', 'data720.txt', 3);
@@ -87,7 +87,7 @@ app.get('/:resolution', (req, res) => {
   else {
     let whichArr = Math.floor(Math.random() * fileObjList[resolution].arr.length);
     fileObjList[resolution].counts++;
-    res.redirect(fileObjList[resolution].arr[whichArr] + '?image&action=format:t_webp|crop:g_0');
+    res.redirect(fileObjList[resolution].arr[whichArr]);
   }  
 })
 
