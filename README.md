@@ -39,7 +39,8 @@ sudo apt-get install nodejs git screen
 
 请打开`app.js`并找到下图代码位置（大约在40行）：
 
-![vTcdS.png](https://i.imgtg.com/2022/09/05/vTcdS.png)
+![image](https://user-images.githubusercontent.com/40263799/189605206-2230491d-59c6-4ee5-8108-65efd83cb6a2.png)
+
 
 请将原有的四条定义删除，并以相同格式配置文件。
 
